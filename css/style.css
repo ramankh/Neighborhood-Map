@@ -1,0 +1,41 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: gray;
+}
+
+#map {
+	top: 0;
+	height: 500px;
+    width: 100%;
+    margin: 5px 5px 5px 5px;
+    border: 2px solid #fff;
+}
+
+.maprow,
+.container {
+    height: 100%;
+}
+
+
+.mapContainer {
+height: 100%; background-color: blue;
+}
+
+.sidebar {
+	height: 100%;
+	background-color: red;
+}
+
+.topbar {
+	height: 100px;
+	background-color: green;
+}
+
+
+.review {
+	background-color: purple;
+	height: 100%;
+}
