@@ -44,10 +44,19 @@ function initMap() {
         center: locations[0],
         zoom: 10,
         draggable: isDraggable
-        //panControl: true // prevent mobile users to loose the location due touching the screen
+            //panControl: true // prevent mobile users to loose the location due touching the screen
     });
 
-    infoWindow = new google.maps.InfoWindow({
+
+    infoWindow = new google.maps.InfoWindow({});
+
+    map.addListener('click', function() {
+        infoWindow.close();
+    });
+
+    $('.fullscreen').click(function(){
+        $(".mapContainer").toggleClass("expand-map");
+        google.maps.event.trigger(map, 'resize');
     });
 
     for (var i = 0; i < locations.length; i++) {
@@ -57,27 +66,27 @@ function initMap() {
             title: locations[i].name,
             animation: null
         }));
-        markers[i].addListener('click', (function(mkr, loc){
+        markers[i].addListener('click', (function(mkr, loc) {
             var currentMark = mkr;
             var thisLocation = loc;
-            return function(){
-                infoWindow.setContent("<div class='infoWin'><h2>"+loc.name+"</div>");
+            return function() {
+                infoWindow.setContent("<div class='infoWin'><h2>" + loc.name + "</div>");
                 infoWindow.open(map, currentMark);
             }
         })(markers[i], locations[i]));
     }
 }
 
-function openInfo(mkr){
-  //  infoWindow.open(map, mkr);
+function openInfo(mkr) {
+    //  infoWindow.open(map, mkr);
 }
 /**
  * This function is called when an item in list is clicked
  * @param  {JSON} name contains clicked item info
  */
-function bounceMarker(name){
+function bounceMarker(name) {
     for (var i = 0; i < markers.length; i++) {
-        if(markers[i].title == name){
+        if (markers[i].title == name) {
             toggleBounce(markers[i]);
         }
     }
@@ -93,7 +102,7 @@ function toggleBounce(mkr) {
     } else {
         mkr.setAnimation(google.maps.Animation.BOUNCE);
         //set marker animation to null after one bounce cycle
-        setTimeout(function(){
+        setTimeout(function() {
             mkr.setAnimation(null);
         }, 750); // each bounce cycle is 750 milliseconds
     }

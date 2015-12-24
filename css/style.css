@@ -18,9 +18,8 @@ body {
 }
 
 #map {
-    margin: 5px 5px 5px 5px;
-    border: 5px solid #33363b;
-    height: 250px;
+
+    height: 100%;
 }
 
 .container {
@@ -28,9 +27,11 @@ height: 100%;
 }
 
 .mapContainer {
-
+    margin: 5px 5px 5px 5px;
+    border: 5px solid #33363b;
     /*background-color: blue;*/
     padding: 0;
+    height: 100%;
 }
 
 .sidebar {
@@ -94,8 +95,47 @@ height: 100%;
 	right: 0;
 }
 
+.fullscreen {
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	cursor: pointer;
+}
+
+.expand-map {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    margin: 0;
+    border: 0;
+}
+
+.map-column {
+	height: 100%;
+}
+
+.map-row {
+	height: 50%;
+}
+
 @media screen and (min-width: 769px) {
 	.content {
 		height: 100%;
+	}
+	.mapContainer {
+		height: 100%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+		.content {
+		height: 100%;
+	}
+	#listView {
+		height: 40%;
 	}
 }

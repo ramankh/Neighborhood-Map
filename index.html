@@ -32,10 +32,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-9">
+            <div class="col-xs-12 col-sm-9 map-column">
                 <div class="row map-row">
                     <div id="mapView" class="col-xs-12 col-sm-12 mapContainer">
                         <div id="map"></div>
+                        <span class="glyphicon glyphicon-fullscreen fullscreen"></span>
                     </div>
                 </div>
                 <div class="row review-row">
@@ -55,7 +56,12 @@
             </div>
         </div>
     </div>
+    <div class="info-window">
+        <h4 data-bind="text: name"></h4>
+
+    </div>
     <script type="text/html" id="fourSqr-template">
+
         <h3 data-bind="text: name"></h3>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
