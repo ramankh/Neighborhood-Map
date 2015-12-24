@@ -16,25 +16,53 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 topbar"></div>
+            <div id="topbar" class="col-xs-12 topbar">
+                <img class="imgProfile" src="images/profile.jpg" alt="">
+            </div>
         </div>
-        <div class="row maprow">
-            <div class="col-xs-12 col-sm-3 sidebar">
+        <div class="row content">
+            <div id="listView" class="col-xs-12 col-sm-3">
+                <div class="sidebar">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" data-bind="value: searchValue, valueUpdate: 'afterkeydown'" placeholder="Search for...">
+                        <i class="glyphicon glyphicon-filter form-control-feedback"></i>
+                    </div>
+                    <ul class="locationsList" data-bind="foreach: tempList">
+                        <li class="listItems" data-bind="click: $parent.itemClicked, text: name"></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-3 review">
-            </div>
-            <div class="col-xs-12 col-sm-6 ">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 mapContainer">
+            <div class="col-xs-12 col-sm-9">
+                <div class="row map-row">
+                    <div id="mapView" class="col-xs-12 col-sm-12 mapContainer">
                         <div id="map"></div>
+                    </div>
+                </div>
+                <div class="row review-row">
+                    <div class="col-xs-12 recommended">
+                        <div class="panel panel-info">
+                            <div class="panel-heading panel-heading-info">Recommended Locations</div>
+                            <div class="panel-body">
+                                <div data-bind="template: { name: 'fourSqr-template', foreach: toShowPlaces}"></div>
+                            </div>
+                            <div class="panel-footer">
+                                <button data-bind="click: prevPage" class="btn btn-default btn-prev">&lt;&lt;</button>
+                                <button data-bind="click: nextPage" class="btn btn-default btn-next">&gt;&gt;</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/html" id="fourSqr-template">
+        <h3 data-bind="text: name"></h3>
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- bootstrap Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="js/knockout-3.4.0.js"></script>
+    <script src="views/vm.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmBaKBMUE71FCC-PH4FA0S0D0gyTSDgow&callback=initMap">
     </script>
     <script src="js/common.js"></script>
