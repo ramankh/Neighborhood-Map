@@ -17,7 +17,10 @@
     <div class="container">
         <div class="row">
             <div id="topbar" class="col-xs-12 topbar">
-                <img class="imgProfile" src="images/profile.jpg" alt="">
+                <div class="logo">
+                    <p class="log-suffix">My</p><P>Faves</p>
+                </div>
+                <img class="imgProfile" src="images/profile.png" alt="">
             </div>
         </div>
         <div class="row content">
@@ -42,7 +45,7 @@
                 <div class="row review-row">
                     <div class="col-xs-12 recommended">
                         <div class="panel panel-info">
-                            <div class="panel-heading panel-heading-info">Recommended Locations</div>
+                            <div class="panel-heading panel-heading-info"><strong>Suggested For You</strong></div>
                             <div class="panel-body">
                                 <div data-bind="template: { name: 'fourSqr-template', foreach: toShowPlaces}"></div>
                             </div>
@@ -56,12 +59,15 @@
             </div>
         </div>
     </div>
+<!--     <div class='infoWin'>
+        <h4>"info.businesses[0].name"</h5>
+        <h5>info.businesses[0].location.address</h5>
+        <h5>info.businesses[0].location.city+','+info.businesses[0].location.state+' '+info.businesses[0].location.zip</h5>
+    </div> -->
     <div class="info-window">
         <h4 data-bind="text: name"></h4>
-
     </div>
     <script type="text/html" id="fourSqr-template">
-
         <h3 data-bind="text: name"></h3>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -71,7 +77,10 @@
     <script src="views/vm.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmBaKBMUE71FCC-PH4FA0S0D0gyTSDgow&callback=initMap">
     </script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/yelp.js"></script>
 </body>
 
 </html>

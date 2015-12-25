@@ -3,29 +3,65 @@ var map;
 function appViewModel() {
     var self = this;
     self.locations = ko.observableArray([{
-        lat: 37.338208,
-        lng: -121.886329,
-        name: "Down Town San Jose"
+        lat: 37.338052,
+        lng: -121.901239,
+        name: "SAP Center",
+        location: {
+            address: "525 W Santa Clara St",
+            city: "San Jose",
+            state: "CA",
+            zip: "95113"
+        }
     }, {
         lat: 37.396869,
         lng: -121.802276,
-        name: "Alum Rock Park"
+        name: "Alum Rock Park",
+        location: {
+            address: "15350 Penitencia Creek Rd",
+            city: "San Jose",
+            state: "CA",
+            zip: "95127"
+        }
     }, {
         lat: 37.327364,
         lng: -121.858972,
-        name: "Happy Hollow Park"
+        name: "Happy Hollow Park",
+        location: {
+            address: "1300 Senter Rd",
+            city: "San Jose",
+            state: "CA",
+            zip: "95112"
+        }
     }, {
         lat: 37.240468,
         lng: -121.873784,
-        name: "Almaden Lake Park"
+        name: "Almaden Lake Park",
+        location: {
+            address: "15652 Almaden Expy",
+            city: "San Jose",
+            state: "CA",
+            zip: "95120"
+        }
     }, {
         lat: 37.403154,
         lng: -121.969836,
-        name: "Levi's Stadium"
+        name: "Levi's Stadium",
+        location: {
+            address: "4900 Marie P DeBartolo Way",
+            city: "Santa Clara",
+            state: "CA",
+            zip: "95054"
+        }
     }, {
         lat: 37.319969,
         lng: -121.858696,
-        name: "San Jose History Park"
+        name: "San Jose History Park",
+        location: {
+            address: " 1650 Senter Rd",
+            city: "San Jose",
+            state: "CA",
+            zip: "95112"
+        }
     }]);
 
     self.itemClicked = function(loc) {
@@ -55,11 +91,11 @@ function appViewModel() {
     }
 
     self.prevPage = function() {
-        var endIndex = self.sliceIndex-5;
-        if (endIndex>0) {
+        var endIndex = self.sliceIndex - 5;
+        if (endIndex > 0) {
             console.log(self.fourSquars().length);
             self.toShowPlaces.removeAll();
-            self.toShowPlaces(self.fourSquars.slice(endIndex-5, endIndex));
+            self.toShowPlaces(self.fourSquars.slice(endIndex - 5, endIndex));
             console.log(self.fourSquars().length);
             self.sliceIndex -= 5;
         }
