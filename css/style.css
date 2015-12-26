@@ -138,6 +138,7 @@ height: 100%;
 
 .map-row {
 	height: 50%;
+	padding-right: 5px;
 }
 
 .infoWin {

@@ -111,14 +111,20 @@ function appViewModel() {
                 //Empty fourSquare array to push new data
                 console.log(data);
                 self.fourSquars.removeAll();
+                var urlPrefix = "https://foursquare.com/v/";
+
                 for (var i = 0; i < data.response.venues.length; i++) {
+                	var venue = data.response.venues[i];
+                	var urlName = venue.name.replace(/ /g,"-");
+                	var url = urlPrefix+urlName+"/"+venue.id;
                     var place = {
-                        name: data.response.venues[i].name,
-                        address: data.response.venues[i].location.address || ""
+                        name: venue.name,
+                        address:venue.location.address || "",
+                        url: url
                     };
                     //push each retrieved place to fourSquars
                     self.fourSquars.push(place);
-                }
+                } console.log(place.url);
                 //reset slice index
                 self.sliceIndex = 0;
                 //put only five entity to be shown at recommended part
