@@ -1,72 +1,16 @@
+/**
+ * all map related codes are here: markers update, infoWindow ...
+ */
 var map;
 var marker;
 var infoWindow;
 var markers = [];
 var foursquare = {};
-
+var locations;
 
 function initMap() {
-    var locations = [{
-        lat: 37.338052,
-        lng: -121.901239,
-        name: "SAP Center",
-        location: {
-            address: "525 W Santa Clara St",
-            city: "San Jose",
-            state: "CA",
-            zip: "95113"
-        }
-    }, {
-        lat: 37.396869,
-        lng: -121.802276,
-        name: "Alum Rock Park",
-        location: {
-            address: "15350 Penitencia Creek Rd",
-            city: "San Jose",
-            state: "CA",
-            zip: "95127"
-        }
-    }, {
-        lat: 37.327364,
-        lng: -121.858972,
-        name: "Happy Hollow Park",
-        location: {
-            address: "1300 Senter Rd",
-            city: "San Jose",
-            state: "CA",
-            zip: "95112"
-        }
-    }, {
-        lat: 37.240468,
-        lng: -121.873784,
-        name: "Almaden Lake Park",
-        location: {
-            address: "15652 Almaden Expy",
-            city: "San Jose",
-            state: "CA",
-            zip: "95120"
-        }
-    }, {
-        lat: 37.403154,
-        lng: -121.969836,
-        name: "Levi's Stadium",
-        location: {
-            address: "4900 Marie P DeBartolo Way",
-            city: "Santa Clara",
-            state: "CA",
-            zip: "95054"
-        }
-    }, {
-        lat: 37.319969,
-        lng: -121.858696,
-        name: "San Jose History Park",
-        location: {
-            address: " 1650 Senter Rd",
-            city: "San Jose",
-            state: "CA",
-            zip: "95112"
-        }
-    }];
+
+    locations = model.getData();
     /**
      * When using mobile devices with google map scrolling is annoying when
      * map is draggable. So this line checks if touching is avaialbe then
@@ -96,26 +40,37 @@ function initMap() {
     google.maps.event.addListener(infoWindow, 'closeclick', function() {
         map.setCenter(locations[0]);
     });
+    /**
+     * set map center to default when closing info window
+     */
     map.addListener('click', function() {
         infoWindow.close();
         map.setCenter(locations[0]);
-
-
     });
 
+    /**
+     * add click event on full screen button and set center to default
+     */
     $('.fullscreen').click(function() {
         $(".mapContainer").toggleClass("expand-map");
-        google.maps.event.trigger(map, 'resize');
+        //let map knows that it should fit to new map size
+        google.maps.event.trigger(map, "resize");
         map.setCenter(locations[0]);
     });
-
+/**
+ * create markers and push theme to markers array
+ */
     for (var i = 0; i < locations.length; i++) {
         markers.push(new google.maps.Marker({
             position: locations[i],
             map: map,
             title: locations[i].name,
-            animation: null
+            animation: null,
         }));
+        /**
+         * add click event to markers using yelp api to fetch
+         * info about the marker location
+         */
         markers[i].addListener('click', (function(mkr, loc) {
             var currentMark = mkr;
             var thisLocation = loc;
@@ -127,18 +82,26 @@ function initMap() {
     }
 }
 
+/**
+ * set contetn of infoWindow based on info fetch from yelp api
+ * @param  {Object} info object returned from yelp api
+ */
 function updateInfo(info) {
-    //  infoWindow.open(map, mkr);
+    var information = info.businesses[0];
     infoWindow.setContent("<div class='info-Win'><div class='infoWin-info'><div class='infoWin-content'>"+
-        "<h4>"+info.businesses[0].name+"</h5>"+
-        "<h5>"+info.businesses[0].location.address+"</h5>"+
-        "<h5>"+info.businesses[0].location.city+', '+info.businesses[0].location.state_code+
-        ' '+info.businesses[0].location.postal_code+"</h5>"+
-        "<h6>"+info.businesses[0].display_phone+"</h6></div>"+ //end of content
-        "<div class=infoWin-img><img src='"+info.businesses[0].image_url+"'></div></div>"+ //end of info-img and infoWin
+        "<h4>"+information.name+"</h5>"+
+        "<h5>"+information.location.address+"</h5>"+
+        "<h5>"+information.location.city+', '+information.location.state_code+
+        ' '+information.location.postal_code+"</h5>"+
+        "<h6>"+information.display_phone+"</h6></div>"+ //end of content
+        "<div class=infoWin-img><img src='"+information.image_url+"'></div></div>"+ //end of info-img and infoWin
         "<div class='info-yelp'><img src='images/yelp-logo-xsmall.png'>"+
-        "<a href='"+info.businesses[0].url+"'><h6>Read more at Yelp</h6></a>"+
-        "<div class='yelp-score'><h4>"+info.businesses[0].rating+"/5</h4></div></div></div>"); //end of info-snippet & infoWin
+        "<a href='"+information.url+"'><h6>Read more at Yelp</h6></a>"+
+        "<div class='yelp-score'><h4>"+information.rating+"/5</h4></div></div></div>"); //end of info-snippet & infoWin
+}
+
+function badInfo() {
+    infoWindow.setContent("<div class='errorInfo'><h3>oops! Try again</h3></div>");
 }
 /**
  * This function is called when an item in list is clicked
@@ -164,7 +127,7 @@ function toggleBounce(mkr) {
         //set marker animation to null after one bounce cycle
         setTimeout(function() {
             mkr.setAnimation(null);
-        }, 1500); // each bounce cycle is 750 milliseconds
+        }, 750); // each bounce cycle is 750 milliseconds
     }
 }
 
@@ -177,7 +140,10 @@ function updateMap(collection) {
     showMarkers(collection);
 }
 
-// Shows any markers currently in the array.
+/**
+ * Shows any markers currently in the array.
+ * @param  {Array} collection set of markers
+ */
 function showMarkers(collection) {
     for (var i = 0; i < markers.length; i++) {
         for (var j = 0; j < collection.length; j++) {
@@ -188,14 +154,19 @@ function showMarkers(collection) {
     }
 }
 
-// Sets the map on all markers in the array.
+/**
+ * sets all markers on map
+ * @param {[type]} map [description]
+ */
 function setMapOnAll(map) {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
     }
 }
 
-// Removes the markers from the map, but keeps them in the array.
+/**
+ * Removes the markers from the map, but keeps them in the array.
+ */
 function clearMarkers() {
     setMapOnAll(null);
 }

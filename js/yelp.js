@@ -1,27 +1,36 @@
+/**
+ * This file contains all yelp related codes including authentications and
+ * ajax call to retrieve data ralated to each selected place.
+ * @type {Object}
+ */
 var yelpApi = {
+    /**
+     * Get data from yelp based on passed location
+     * @param  {Object} loc delected location
+     */
    getInfo: function(loc){
     var info;
         var auth = {
-            //
-            // Update with your auth tokens.
-            //
+            // auth tokens
             consumerKey: "ko6gSNprh3xFbLpqEWnEgw",
             consumerSecret: "hFw66N1GfCev6_gZh4vy3vVtNuE",
             accessToken: "tSQgowGrM-GatDfYZU9BwTGc7phYhZ1B",
-            // This example is a proof of concept, for how to use the Yelp v2 API with javascript.
-            // You wouldn't actually want to expose your access token secret like this in a real application.
             accessTokenSecret: "8-v7BeJStmPjiGUKQCdSqtoe81E",
             serviceProvider: {
                 signatureMethod: "HMAC-SHA1"
             }
         };
+        //put location info in a new variable
         var place=loc.location;
+        //put location name in a new variable
         var terms = loc.name;
+        //where should yelp api look for above term
         var near = place.city+'+'+place.state+'+'+place.zip;
         var accessor = {
             consumerSecret: auth.consumerSecret,
             tokenSecret: auth.accessTokenSecret
         };
+        //all parameters which will pass to ajax call
         parameters = [];
         parameters.push(['term', terms]);
         parameters.push(['location', near]);
@@ -40,7 +49,9 @@ var yelpApi = {
         OAuth.SignatureMethod.sign(message, accessor);
         var parameterMap = OAuth.getParameterMap(message.parameters);
         parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
-        console.log(parameterMap);
+        /**
+         * Ajax call to yelp api
+         */
         $.ajax({
             'url': message.action,
             'data': parameterMap,
@@ -48,9 +59,14 @@ var yelpApi = {
             'dataType': 'jsonp',
             'jsonpCallback': 'cb',
             'success': function(data, textStats, XMLHttpRequest) {
-                console.log(data);
+                //call updateInfo if data fetched succesfully
                 updateInfo(data);
+            },
+            error: function(e){
+                //call badInfo if data fetched with error
+                badInfo();
             }
+
         });
 
     }

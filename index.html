@@ -59,11 +59,6 @@
             </div>
         </div>
     </div>
-<!--     <div class='infoWin'>
-        <h4>"info.businesses[0].name"</h5>
-        <h5>info.businesses[0].location.address</h5>
-        <h5>info.businesses[0].location.city+','+info.businesses[0].location.state+' '+info.businesses[0].location.zip</h5>
-    </div> -->
     <div class="info-window">
         <h4 data-bind="text: name"></h4>
     </div>
@@ -74,12 +69,14 @@
     <!-- bootstrap Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="js/knockout-3.4.0.js"></script>
-    <script src="views/vm.js"></script>
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmBaKBMUE71FCC-PH4FA0S0D0gyTSDgow&callback=initMap">
     </script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+    <script src="models/appModel.js"></script>
     <script src="js/common.js"></script>
+    <script src="views/vm.js"></script>
     <script src="js/yelp.js"></script>
 </body>
 
