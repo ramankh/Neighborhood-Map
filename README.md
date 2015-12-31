@@ -11,12 +11,12 @@ In this appliction the following apis and technologies are used:
 1. Google Map Java Script API
 2. Yelp API
 3. FourSoquare API
-### Libraries & FrameWorks:
+## Libraries & FrameWorks:
 1. JQuery
 2. Bootstrap
 3. Grunt
 4. Knockout.JS
-### Build and Minifying tools:
+## Build and Minifying tools:
 1. HTMLMIN
 2. CSSMIN
 3. UGLIFY

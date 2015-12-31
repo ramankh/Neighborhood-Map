@@ -7,23 +7,23 @@ based on their name and get more information by clicking on each marker.
 You can find applications live version [here] (http://ramankh.github.io/Neighborhood-Map/)
 ## Api and Technologies
 In this appliction the following apis and technologies are used:
-APIs:
+## APIs:
 1. Google Map Java Script API
 2. Yelp API
 3. FourSoquare API
-Libraries & FrameWorks:
+## Libraries & FrameWorks:
 1. JQuery
 2. Bootstrap
 3. Grunt
 4. Knockout.JS
-Build and Minifying tools:
+## Build and Minifying tools:
 1. HTMLMIN
 2. CSSMIN
 3. UGLIFY
 
 ## Specification
 This is a single page application using knockout.JS framework. This
-project is implementes based on MVVM paatern. All search filters and
+project is implemented based on MVVM paatern. All search filters and
 data population on list view are implemented based on knockout databinding
 method
 
