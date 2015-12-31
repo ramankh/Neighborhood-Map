@@ -57,9 +57,9 @@ function initMap() {
         google.maps.event.trigger(map, "resize");
         map.setCenter(locations[0]);
     });
-/**
- * create markers and push theme to markers array
- */
+    /**
+     * create markers and push theme to markers array
+     */
     for (var i = 0; i < locations.length; i++) {
         markers.push(new google.maps.Marker({
             position: locations[i],
@@ -77,6 +77,7 @@ function initMap() {
             return function() {
                 var info = yelpApi.getInfo(thisLocation);
                 infoWindow.open(map, currentMark);
+                toggleBounce(currentMark);
             }
         })(markers[i], locations[i]));
     }
@@ -88,16 +89,16 @@ function initMap() {
  */
 function updateInfo(info) {
     var information = info.businesses[0];
-    infoWindow.setContent("<div class='info-Win'><div class='infoWin-info'><div class='infoWin-content'>"+
-        "<h4>"+information.name+"</h5>"+
-        "<h5>"+information.location.address+"</h5>"+
-        "<h5>"+information.location.city+', '+information.location.state_code+
-        ' '+information.location.postal_code+"</h5>"+
-        "<h6>"+information.display_phone+"</h6></div>"+ //end of content
-        "<div class=infoWin-img><img src='"+information.image_url+"'></div></div>"+ //end of info-img and infoWin
-        "<div class='info-yelp'><img src='images/yelp-logo-xsmall.png'>"+
-        "<a href='"+information.url+"'><h6>Read more at Yelp</h6></a>"+
-        "<div class='yelp-score'><h4>"+information.rating+"/5</h4></div></div></div>"); //end of info-snippet & infoWin
+    infoWindow.setContent("<div class='info-Win'><div class='infoWin-info'><div class='infoWin-content'>" +
+        "<h4>" + information.name + "</h5>" +
+        "<h5>" + information.location.address + "</h5>" +
+        "<h5>" + information.location.city + ', ' + information.location.state_code +
+        ' ' + information.location.postal_code + "</h5>" +
+        "<h6>" + information.display_phone + "</h6></div>" + //end of content
+        "<div class=infoWin-img><img src='" + information.image_url + "'></div></div>" + //end of info-img and infoWin
+        "<div class='info-yelp'><img src='images/yelp-logo-xsmall.png'>" +
+        "<a href='" + information.url + "'><h6>Read more at Yelp</h6></a>" +
+        "<div class='yelp-score'><h4>" + information.rating + "/5</h4></div></div></div>"); //end of info-snippet & infoWin
 }
 
 function badInfo() {
@@ -138,6 +139,15 @@ function toggleBounce(mkr) {
 function updateMap(collection) {
     clearMarkers();
     showMarkers(collection);
+}
+
+function showInfoWin(title) {
+    for (var i = 0; i < locations.length; i++) {
+        if (locations[i].name == title) {
+            var info = yelpApi.getInfo(locations[i]);
+            infoWindow.open(map, markers[i]);
+        }
+    }
 }
 
 /**

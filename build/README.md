@@ -36,3 +36,8 @@ and google map markers.
 panel and by clicking on each link you can visit the related info on the origin website.
 3. By clicking on each marker on the map you can get more information about selected
 location from yelp and also navigate to the origin page.
+
+## How to build the application
+1. In command prompt go to project folder path which Gruntfile is located
+2. Run nmp install
+3. Run grunt

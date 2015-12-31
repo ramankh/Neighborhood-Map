@@ -18,16 +18,23 @@
         <div class="row">
             <div id="topbar" class="col-xs-12 topbar">
                 <div class="logo">
-                    <p class="log-suffix">My</p><P>Faves</p>
+                    <p class="log-suffix">My</p>
+                    <P>Faves</p>
                 </div>
-                <img class="imgProfile" src="images/Profile.png" alt="">
+                <img class="profile-img" src="images/Profile.png" alt="profile-picture">
+            </div>
+            <div class="col-xs-12 topbar-xs">
+                <div class="logo logo-xs">
+                    <P>MyFaves</p>
+                </div>
+                <img class="profile-img-xs" src="images/Profile.png" alt="profile-picture">
             </div>
         </div>
         <div class="row content">
             <div id="listView" class="col-xs-12 col-sm-3">
                 <div class="sidebar">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" data-bind="value: searchValue, valueUpdate: 'afterkeydown'" placeholder="Search for...">
+                        <input type="text" class="typeahead form-control search-box" data-bind="value: searchValue, valueUpdate: 'afterkeydown'" placeholder="Search for...">
                         <i class="glyphicon glyphicon-filter form-control-feedback"></i>
                     </div>
                     <ul class="locationsList" data-bind="foreach: tempList">
@@ -66,16 +73,16 @@
         <a data-bind="attr: {href: url}" target="_blank"><h4 data-bind="text: name"></h4></a>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <!-- bootstrap Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="js/knockout-3.4.0.js"></script>
-
+    <script src="models/appModel.js"></script>
+    <script src="js/common.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmBaKBMUE71FCC-PH4FA0S0D0gyTSDgow&callback=initMap">
     </script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
     <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
-    <script src="models/appModel.js"></script>
-    <script src="js/common.js"></script>
     <script src="views/vm.js"></script>
     <script src="js/yelp.js"></script>
 </body>
